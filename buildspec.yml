@@ -1,1 +1,28 @@
+version: 0.2
 
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+
+  build:
+    commands:
+      - echo "Building static website..."
+      - mkdir -p public
+      - cp index.html public/
+      - cp styles.css public/
+      - cp script.js public/
+      - cp package.json ./
+      - cp app.js ./
+
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: .
